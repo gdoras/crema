@@ -5,7 +5,8 @@ import pickle
 import os
 from pkg_resources import resource_filename
 
-from keras.models import model_from_config
+import tensorflow as tf
+#from keras.models import model_from_config
 import librosa
 
 from ..version import version as version
@@ -102,7 +103,7 @@ class CremaModel(object):
                                     os.path.join(rsc, 'model_spec.pkl')),
                   'rb') as fd:
             spec = pickle.load(fd)
-            self.model = model_from_config(spec,
+            self.model = tf.keras.models.model_from_config(spec,
                                            custom_objects={k: layers.__dict__[k]
                                                            for k in layers.__all__})
 
